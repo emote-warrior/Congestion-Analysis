@@ -1,0 +1,36 @@
+name: Traffic Data Fetch
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Start at 6:30 PM UTC (12 AM IST)
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  fetch_traffic_data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pandas openpyxl
+          
+      - name: Run script
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: python main.py
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git commit -m "Updated traffic data $(date +'%Y-%m-%d %H:%M:%S')"
+          git push
