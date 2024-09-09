@@ -1,59 +1,47 @@
-Traffic Duration Fetcher
-Overview
-This Python script fetches the duration in traffic between pairs of origin and destination locations using the Google Maps Directions API. It saves the results in an Excel file for easy reference and data analysis.
+# Traffic Duration in Google Maps
 
-Features
-Fetches real-time traffic data between multiple origin-destination pairs.
-Uses the Google Maps Directions API to get the best traffic estimate.
-Saves the results in an Excel file with timestamped filenames.
-Prerequisites
-Python 3.x
-Google Maps API Key: You must have an active API key from Google Cloud.
-Required Python libraries:
-requests
-pandas
-openpyxl
-Setup
-Clone this repository:
+This script fetches the estimated travel time between multiple origin and destination pairs in real-time traffic using the Google Maps Directions API. The results are saved in an Excel file with the timestamp.
 
-bash
-Copy code
-git clone https://github.com/your-username/Traffic-Duration-Fetcher.git
-Install the required dependencies:
+## Features
+- Retrieves real-time traffic data for a list of origin-destination pairs.
+- Outputs travel duration in traffic.
+- Saves the data to an Excel file.
 
-bash
-Copy code
-pip install -r requirements.txt
-Set up your Google Maps API key as an environment variable:
+## Prerequisites
+Before running the script, ensure you have the following:
+- A valid Google Maps API key. You can get one from the [Google Cloud Console](https://console.cloud.google.com/).
+- Python 3.x installed on your system.
 
-On macOS/Linux:
-bash
-Copy code
-export GOOGLE_MAPS_API_KEY='your-api-key'
-On Windows:
-bash
-Copy code
-set GOOGLE_MAPS_API_KEY='your-api-key'
-How to Use
-Add your origin and destination locations in the locations list in traffic_duration.py.
+## Installation
 
-Run the script:
+1. Clone the repository or download the `traffic_duration.py` file.
+2. Install the required dependencies by running:
 
-bash
-Copy code
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+    If you don’t have a `requirements.txt` file, you can manually install the required packages:
+
+    ```bash
+    pip install requests pandas openpyxl
+    ```
+
+3. Set up your Google Maps API key as an environment variable:
+
+    **Linux/macOS**:
+    ```bash
+    export GOOGLE_MAPS_API_KEY='your_api_key_here'
+    ```
+
+    **Windows**:
+    ```bash
+    set GOOGLE_MAPS_API_KEY=your_api_key_here
+    ```
+
+## Usage
+
+Run the script using Python:
+
+```bash
 python traffic_duration.py
-The script will create an Excel file with the traffic duration data saved as traffic_data_<timestamp>.xlsx.
-
-Example
-Example of the output in the console:
-
-vbnet
-Copy code
-Duration from 28.63615,77.2139416666667 to 28.6333388888889,77.1999305555556 is 12 mins
-Duration from 28.6333388888889,77.1999305555556 to 28.6466638888889,77.1952611111111 is 8 mins
-...
-Contributing
-Feel free to submit issues or pull requests. Contributions are welcome to improve this script!
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
