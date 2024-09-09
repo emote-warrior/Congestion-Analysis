@@ -44,4 +44,4 @@ Before running the script, ensure you have the following:
 Run the script using Python:
 
 ```bash
-python traffic_duration.py
+python main.py
