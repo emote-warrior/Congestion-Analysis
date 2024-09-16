@@ -14,14 +14,14 @@ Before running the script, ensure you have the following:
 
 ## Installation
 
-1. Clone the repository or download the `traffic_duration.py` file.
+1. Clone the repository or download the `main.py` file.
 2. Install the required dependencies by running:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-    If you don’t have a `requirements.txt` file, you can manually install the required packages:
+    If you don’t see a `requirements.txt` file, you can manually install the required packages:
 
     ```bash
     pip install requests pandas openpyxl
