@@ -2,7 +2,7 @@ name: Traffic Data Fetch
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Start at 6:30 PM UTC (12 AM IST)
+    #- cron: '0 * * * *'  # Start at 6:30 PM UTC (12 AM IST)
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
