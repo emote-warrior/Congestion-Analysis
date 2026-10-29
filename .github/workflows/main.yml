@@ -1,36 +1,62 @@
 name: Traffic Data Fetch
 
 on:
-  # schedule:
-    # - cron: '0 * * * *'  # Start at 6:30 PM UTC (12 AM IST)
-  workflow_dispatch:  # Allows manual triggering of the workflow
+  schedule:
+    # GitHub cron is UTC and often runs late or drops runs at busy times.
+    # Primary run at :30 UTC (on the hour in IST); backup at :50 UTC, which
+    # main.py skips when the IST hour slot is already collected.
+    - cron: '30 * * * *'
+    - cron: '50 * * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Collect even if this hour is already collected'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+# Queue runs one at a time so two pushes never collide.
+concurrency:
+  group: traffic-data
+  cancel-in-progress: false
 
 jobs:
   fetch_traffic_data:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-      
+        uses: actions/checkout@v4
+
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
-      
+          python-version: '3.12'
+          cache: pip
+
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests pandas openpyxl
-          
+        run: pip install -r requirements.txt
+
       - name: Run script
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          FORCE_RUN: ${{ inputs.force }}
         run: python main.py
-      
+
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -A
-          git commit -m "Updated traffic data $(date +'%Y-%m-%d %H:%M:%S')"
-          git push
+          git add data/
+          if git diff --cached --quiet; then
+            echo "No new data"
+            exit 0
+          fi
+          git commit -m "Traffic data $(TZ=Asia/Kolkata date +'%Y-%m-%d %H:%M') IST"
+          for attempt in 1 2 3 4; do
+            git pull --rebase && git push && exit 0
+            sleep $((attempt * 5))
+          done
+          exit 1
