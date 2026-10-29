@@ -6,7 +6,7 @@ on:
     # Primary run at :30 UTC (on the hour in IST); backup at :50 UTC, which
     # main.py skips when the IST hour slot is already collected.
     - cron: '30 * * * *'
-    - cron: '50 * * * *'
+    - cron: '45 * * * *'
   workflow_dispatch:
     inputs:
       force:
