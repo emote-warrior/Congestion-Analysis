@@ -1,0 +1,45 @@
+/* A4 portrait. Grid: margins 15 mm sides, 16 mm top and bottom; 180 mm content, 2 columns of
+   87.5 mm with a 5 mm gutter. Spacing steps (mm): 1, 2, 3, 4, 6, 8, 12.
+   Type (print, ratio about 1.25): display Ogg 28 pt; heading Garnett Medium 14 pt; sub Garnett
+   Semibold 9 pt; body Garnett 9 pt / 12.4 pt; key figure Garnett Medium 21 pt; labels and
+   captions Everett Mono 6.5 pt. */
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #F2EEE3; }
+body { font-family: 'Garnett', sans-serif; color: #1B191A; font-size: 9pt; line-height: 12.4pt;
+       font-variant-numeric: tabular-nums; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: 210mm; height: 297mm; padding: 16mm 15mm 16mm 15mm; position: relative; overflow: hidden;
+        page-break-after: always; background: #F2EEE3; }
+.topline, .botline { position: absolute; left: 15mm; right: 15mm; display: flex; justify-content: space-between;
+        font-family: 'Everett Mono', monospace; font-size: 6.5pt; letter-spacing: 0.06em; text-transform: uppercase; color: #6F6A60; }
+.topline { top: 8mm; border-bottom: 0.2mm solid #CBC3B1; padding-bottom: 1.5mm; }
+.botline { bottom: 8mm; border-top: 0.2mm solid #CBC3B1; padding-top: 1.5mm; }
+.kicker { font-family: 'Everett Mono', monospace; font-size: 6.5pt; letter-spacing: 0.08em; text-transform: uppercase;
+          color: #C9353B; margin-bottom: 2mm; }
+h1 { font-family: 'Ogg', serif; font-weight: 400; font-size: 28pt; line-height: 1.04; letter-spacing: -0.01em; max-width: 165mm; margin-bottom: 3mm; }
+h2.ft { font-family: 'Ogg', serif; font-weight: 400; font-size: 20pt; line-height: 1.08; margin-bottom: 3mm; max-width: 170mm; }
+.stand { font-size: 11pt; line-height: 14pt; max-width: 150mm; margin-bottom: 4mm; color: #1E3837; }
+.kfs { display: flex; gap: 4mm; border-top: 0.5mm solid #1B191A; padding-top: 2mm; margin-bottom: 4mm; }
+.kf { flex: 1; }
+.kv { font-weight: 500; font-size: 21pt; line-height: 1.05; }
+.kf.up .kv { color: #C9353B; } .kf.down .kv { color: #2F6F52; }
+.kl { font-family: 'Everett Mono', monospace; font-size: 6pt; line-height: 1.35; letter-spacing: 0.04em; text-transform: uppercase; color: #6F6A60; margin-top: 1mm; }
+figure { margin-bottom: 4mm; }
+figcaption { font-family: 'Everett Mono', monospace; font-size: 6.5pt; line-height: 1.4; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 2mm; }
+figcaption b { font-weight: 500; color: #C9353B; margin-right: 1.5mm; }
+.note { font-size: 7pt; line-height: 9.5pt; color: #6F6A60; margin-top: 1mm; }
+.src { font-family: 'Everett Mono', monospace; font-size: 5.8pt; letter-spacing: 0.03em; color: #6F6A60; margin-top: 1mm; }
+.cols { column-count: 2; column-gap: 5mm; }
+.cols p { margin-bottom: 2.2mm; hyphens: manual; }
+.method { position: absolute; left: 15mm; right: 15mm; bottom: 13mm; font-size: 6.6pt; line-height: 8.6pt; color: #6F6A60;
+          border-top: 0.2mm solid #CBC3B1; padding-top: 1.5mm; }
+.two { display: flex; gap: 5mm; } .two figure { flex: 1; }
+table.data { width: 100%; border-collapse: collapse; font-size: 7pt; line-height: 9pt; }
+table.data th { font-family: 'Everett Mono', monospace; font-weight: 400; font-size: 6pt; letter-spacing: 0.04em; text-transform: uppercase;
+                color: #6F6A60; text-align: left; border-bottom: 0.3mm solid #1B191A; padding: 0.8mm 1mm; }
+table.data td { border-bottom: 0.1mm solid #CBC3B1; padding: 0.55mm 1mm; }
+table.data .n { text-align: right; font-family: 'Everett Mono', monospace; font-size: 6.6pt; }
+td.up { color: #C9353B; } td.down { color: #2F6F52; }
+.two.tables { gap: 5mm; } .two.tables table { flex: 1; }
+table.data td { white-space: nowrap; } table.data { font-size: 6.6pt; line-height: 8pt; }
+table.data th { white-space: nowrap; }
